@@ -417,8 +417,7 @@
       <div class="header-sticker left">FLAT<br>30% OFF</div>
       <div class="header-sticker right">FREE<br>CRUNCH</div>
       
-     <!-- CSS Grid for all 6 variants -->
-      <div class="product-grid">
+           <div class="product-grid">
         <div class="product-card"><img src="images/asteroid.jpg" alt="Asteroid"></div>
         <div class="product-card"><img src="images/4M8A9888%20copy.jpg" alt="Variant 2"></div>
         <div class="product-card"><img src="images/4M8A9934%20copy.jpg" alt="Variant 3"></div>
@@ -563,7 +562,7 @@
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          const mainSiteUrl = 'https://www.choconaut.com'; // Change to your main site URL if different
+          const mainSiteUrl = 'https://choconaut.in';
           document.querySelector('.container').innerHTML = `
             <div style="text-align: center; padding: 40px 20px;">
               <h1 style="color: #ffde00; font-size: 32px;">MISSION SUCCESS</h1>
@@ -589,9 +588,9 @@
               setTimeout(() => {
                 window.location.href = mainSiteUrl + '?discount=' + encodeURIComponent(data.coupon);
               }, 1000);
-            }).catch(err => {
-              window.location.href = mainSiteUrl + '?discount=' + encodeURIComponent(data.coupon);
-            });
+          }).catch(err => {
+            window.location.href = mainSiteUrl + '?discount=' + encodeURIComponent(data.coupon);
+          });
           });
         } else {
           alert(data.message);
