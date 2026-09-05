@@ -6,9 +6,9 @@
   <title>Choco-Naut&trade; | Cosmic Deal</title>
   <style>
     :root {
-      --space-dark: #090614; /* Deeper cosmic purple-black */
-      --star-yellow: #ffe600; /* Brighter neon yellow */
-      --alert-red: #ff003c; /* Vibrant neon red/pink */
+      --space-dark: #090614;
+      --star-yellow: #ffe600;
+      --alert-red: #ff003c;
       --neon-cyan: #00e5ff;
       --neon-purple: #b000ff;
       --card-white: #ffffff;
@@ -19,7 +19,6 @@
     body {
       font-family: 'Arial Black', Impact, sans-serif;
       background-color: var(--space-dark);
-      /* Richer, more visually appealing cosmic background */
       background-image: 
         radial-gradient(circle at top right, #3d0043 0%, transparent 50%),
         radial-gradient(circle at bottom left, #001f4d 0%, var(--space-dark) 60%);
@@ -147,31 +146,34 @@
       color: var(--text-dark);
       border-color: var(--alert-red);
       transform: rotate(18deg);
-      /* Offset the animation so they blink back and forth */
       animation: neon-blink-yellow 1.5s infinite alternate 0.75s; 
     }
 
-    /* Swipeable Product Gallery */
-    .product-gallery {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding-bottom: 15px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
+    /* --- CSS Grid for Product Variants --- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
       position: relative;
       z-index: 1;
     }
-    .product-gallery::-webkit-scrollbar { display: none; }
-    .product-gallery img {
-      height: 280px;
-      min-width: 200px;
-      border-radius: 12px;
-      scroll-snap-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.8);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      object-fit: cover;
-      opacity: 0.9; 
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
     }
 
     /* --- VIBRANT USP STICKERS --- */
@@ -288,7 +290,6 @@
       transform: rotate(12deg);
       border: 4px solid var(--card-white);
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      /* Subtle pulse on the small badges too */
       animation: neon-blink-yellow 2s infinite alternate 1s; 
     }
     .offer-card:has(input:checked) {
@@ -395,12 +396,10 @@
 </head>
 <body>
 
-  <!-- Giant Shooting Stars -->
   <div class="shooting-star star-1"></div>
   <div class="shooting-star star-2"></div>
   <div class="shooting-star star-3"></div>
 
-  <!-- Drifting Geometric Astronaut -->
   <svg class="drifting-astronaut" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <rect x="25" y="10" width="50" height="45" rx="20" fill="none" stroke="#ffffff" stroke-width="3"/>
     <rect x="32" y="20" width="36" height="20" rx="8" fill="none" stroke="#ffffff" stroke-width="3"/>
@@ -415,21 +414,19 @@
     <div class="hero-section">
       <h1 class="brand-title">Choco-Naut&trade;</h1>
       
-      <!-- Massive Blinking Deal Stickers -->
-      <div class="header-sticker left">FLAT<br>30% OFF</div>
+      <div class="header-sticker left">FLAT<br>12% OFF</div>
       <div class="header-sticker right">FREE<br>CRUNCH</div>
       
-      <!-- Swipeable Product Gallery -->
-      <div class="product-gallery">
-        <img src="4M8A9888 copy.jpg" alt="Milkyway Explorer">
-        <img src="4M8A9934 copy.jpg" alt="Velvet Comet">
-        <img src="4M8A9944.jpg" alt="Nebula Swirl">
-        <img src="4M8A9964.jpg" alt="Smooth Astro">
-        <img src="4M8A9970 copy.jpg" alt="Asteroid Crunch">
+      <div class="product-grid">
+        <div class="product-card"><img src="asteroid.jpg" alt="Asteroid"></div>
+        <div class="product-card"><img src="4M8A9888 copy.jpg" alt="Variant 2"></div>
+        <div class="product-card"><img src="4M8A9934 copy.jpg" alt="Variant 3"></div>
+        <div class="product-card"><img src="4M8A9944.JPG" alt="Variant 4"></div>
+        <div class="product-card"><img src="4M8A9964.JPG" alt="Variant 5"></div>
+        <div class="product-card"><img src="4M8A9970 copy.jpg" alt="Variant 6"></div>
       </div>
     </div>
 
-    <!-- Vibrant USP Badges / Stickers -->
     <div class="usp-stickers-container">
       <div class="usp-badge">Indian Origin Chocolates</div>
       <div class="usp-badge">No Preservatives Or Added Flavours</div>
@@ -455,12 +452,12 @@
         </label>
 
         <label class="offer-card">
-          <input type="radio" name="offerCode" value="30_PERCENT"> 
+          <input type="radio" name="offerCode" value="12_PERCENT"> 
           <div class="offer-text">
-            <strong>30% OFF</strong>
-            <span>UNLOCKS ON 3+ BARS</span>
+            <strong>12% OFF</strong>
+            <span>UNLOCKS ON 4+ BARS</span>
           </div>
-          <div class="sale-badge">FLAT<br>30%<br>OFF</div>
+          <div class="sale-badge">FLAT<br>12%<br>OFF</div>
         </label>
       </div>
 
@@ -556,7 +553,6 @@
         image: base64Photo
       };
 
-      // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE:
       const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbynuzHuTy8NNkEso8lo1zOXLNo3Nidtm40ZKE0qz4chZ4rC3MNiTViDPxHx7zMSVrPL/exec';
 
       fetch(WEB_APP_URL, {
@@ -566,7 +562,6 @@
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          // Replace the form UI with the success coupon screen
           document.querySelector('.container').innerHTML = `
             <div style="text-align: center; padding: 40px 20px;">
               <h1 style="color: #ffde00; font-size: 32px;">MISSION SUCCESS</h1>
@@ -594,5 +589,3 @@
 </script>
 </body>
 </html>
-
-
