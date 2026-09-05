@@ -563,17 +563,36 @@
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
+          const mainSiteUrl = 'https://www.choconaut.com'; // Change to your main site URL if different
           document.querySelector('.container').innerHTML = `
             <div style="text-align: center; padding: 40px 20px;">
               <h1 style="color: #ffde00; font-size: 32px;">MISSION SUCCESS</h1>
               <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 16px; margin: 20px 0;">Your unique one-time coupon code is:</p>
-              <div style="background: #fff; color: #111; padding: 20px; font-size: 28px; font-weight: 900; border-radius: 8px; margin: 20px 0; letter-spacing: 2px;">
+              
+              <div id="coupon-box" style="background: #fff; color: #111; padding: 20px; font-size: 28px; font-weight: 900; border-radius: 8px; margin: 20px 0; letter-spacing: 2px; cursor: pointer; border: 3px dashed #ff003c;" title="Click to copy & go to store">
                 ${data.coupon}
               </div>
+              
+              <p id="copy-status" style="font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #00ff66; font-weight: bold; margin-bottom: 15px; min-height: 18px;"></p>
+              
               <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 14px; color: #ffde00; font-weight: bold; margin-top: 15px;">Valid Until: ${data.expires}</p>
-              <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 14px; color: #ccc; margin-top: 10px;">Copy this code and paste it into the coupon section at checkout on our website.</p>
+              <p style="font-family: 'Helvetica Neue', sans-serif; font-size: 14px; color: #ccc; margin-top: 10px;">Tap the code box to copy it and jump straight to our shop!</p>
             </div>
           `;
+
+          const couponBox = document.getElementById('coupon-box');
+          const copyStatus = document.getElementById('copy-status');
+
+          couponBox.addEventListener('click', () => {
+            navigator.clipboard.writeText(data.coupon).then(() => {
+              copyStatus.innerText = "✓ CODE COPIED! REDIRECTING TO SHOP...";
+              setTimeout(() => {
+                window.location.href = mainSiteUrl + '?discount=' + encodeURIComponent(data.coupon);
+              }, 1000);
+            }).catch(err => {
+              window.location.href = mainSiteUrl + '?discount=' + encodeURIComponent(data.coupon);
+            });
+          });
         } else {
           alert(data.message);
           submitBtn.innerText = "CLAIM DISCOUNT NOW";
